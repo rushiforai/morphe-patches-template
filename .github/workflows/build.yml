@@ -1,0 +1,36 @@
+name: build-mpp
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build patch bundle
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GPR_TOKEN }}
+        run: ./gradlew build --no-daemon
+
+      - name: Upload .mpp
+        uses: actions/upload-artifact@v4
+        with:
+          name: mpp
+          path: patches/build/libs/*.mpp
+          if-no-files-found: error

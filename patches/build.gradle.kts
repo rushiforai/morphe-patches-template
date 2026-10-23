@@ -1,12 +1,11 @@
-group = "app.template"
+group = "dev.rushi.morphepatches"
 
 patches {
-    // TODO: Update this section with your project details.
     about {
-        name = "UserXYZ Patches"
-        description = "Patches for apps I like"
-        source = "git@github.com:UserXYZ/morphe-patches.git"
-        author = "Awesome dev"
+        name = "Speedtest Patches"
+        description = "Morphe patches for Speedtest"
+        source = "local: speedtest-morphe-patches"
+        author = "Morphe Pilot"
         contact = "na"
         website = "na"
         license = "GPLv3"
